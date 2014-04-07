@@ -3,76 +3,82 @@ using System.Collections;
 
 namespace com.inkrunner.gestures
 {
-	/// <summary>
-	/// This class is for test the functionality in the Unity Editor
-	/// </summary>
-	public class GestureManagerMouse : MonoBehaviour {
-		
-		private Vector2 _firstPressPos;	
-		private Vector2 _secondPressPos;	
-		private Vector2 _currentSwipe;
-		private GUIText SwipeText;
-		
-		void Awake()
-		{
-			SwipeText = FindObjectOfType<GUIText> ();
-		}	
-		
-		void Update()
-		{
-			CheckGesture ();
-		}
-		
-		public void CheckGesture()		
-		{		
-			if(Input.GetMouseButtonDown(0))			
-			{		
-				//save began touch 2d point			
-				_firstPressPos = new Vector2(Input.mousePosition.x,Input.mousePosition.y);	
-				SwipeText.text = "Tap!";
-			}
-			
-			if(Input.GetMouseButtonUp(0))			
-			{			
-				//save ended touch 2d point			
-				_secondPressPos = new Vector2(Input.mousePosition.x,Input.mousePosition.y);		
-				
-				//create vector from the two points
-				_currentSwipe = new Vector2(_secondPressPos.x - _firstPressPos.x, _secondPressPos.y - _firstPressPos.y); 
-				
-				//normalize the 2d vector
-				_currentSwipe.Normalize();
-				
-				//swipe upwards
-				if(_currentSwipe.y > 0 && _currentSwipe.x > -0.5f && _currentSwipe.x < 0.5f)
-				{				
-					Debug.Log("up swipe");
-					SwipeText.text = "Swipe UP!";
-				}
-				
-				//swipe down
-				if(_currentSwipe.y < 0 && _currentSwipe.x > -0.5f && _currentSwipe.x < 0.5f)
-				{
-					Debug.Log("down swipe");
-					SwipeText.text = "Swipe DOWN!";
-				}
-				
-				//swipe left
-				if(_currentSwipe.x < 0 && _currentSwipe.y > -0.5f && _currentSwipe.y < 0.5f)
-				{
-					Debug.Log("left swipe");
-					SwipeText.text = "Swipe LEFT!";
-				}
-				
-				//swipe right
-				if(_currentSwipe.x > 0 && _currentSwipe.y > -0.5f && _currentSwipe.y < 0.5f)
-				{
-					Debug.Log("right swipe");
-					SwipeText.text = "Swipe RIGHT!";
-				}
-				
-			}
-			
-		}
-	}
+    /// <summary>
+    /// This class is for test the functionality in the Unity Editor
+    /// </summary>
+    public class GestureManagerMouse : MonoBehaviour
+    {
+        public float SwipeThreshold = 0.1f;
+        private Vector2 _firstPressPosition;
+        private Vector2 _secondPressPosition;
+        private Vector2 _currentSwipe;
+        private InputsJugador _inputManager;
+
+
+        void Awake()
+        {
+            _inputManager = GetComponent<InputsJugador>();
+        }
+
+        void Update()
+        {
+            CheckGesture();
+        }
+
+        public void CheckGesture()
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                //save began touch 2d point			
+                _firstPressPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+                //_startTime = Time.time;
+                //_gestureText.text = "Tap!";
+            }
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                //save ended touch 2d point			
+                _secondPressPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+
+                //create vector from the two points
+                _currentSwipe = new Vector2(_secondPressPosition.x - _firstPressPosition.x, _secondPressPosition.y - _firstPressPosition.y);
+
+                _currentSwipe.x = _currentSwipe.x/Screen.width;
+                _currentSwipe.y = _currentSwipe.y / Screen.height;
+
+                Debug.Log("Y movement: " + _currentSwipe.y);
+                Debug.Log("X movement: " + _currentSwipe.x);
+
+                //swipe ups
+                if (_currentSwipe.y > SwipeThreshold && Mathf.Abs(_currentSwipe.x) < SwipeThreshold)
+                {
+                }
+
+                //swipe down
+                if (_currentSwipe.y < -SwipeThreshold && Mathf.Abs(_currentSwipe.x) < SwipeThreshold)
+                {
+                }
+
+                //swipe left
+                if (_currentSwipe.x < -SwipeThreshold && Mathf.Abs(_currentSwipe.y) < SwipeThreshold)
+                {
+                }
+
+                //swipe right
+                if (_currentSwipe.x > SwipeThreshold && Mathf.Abs(_currentSwipe.y) < SwipeThreshold)
+                {
+                }
+
+                //Tap
+                if (Mathf.Abs(_currentSwipe.x) < SwipeThreshold && Mathf.Abs(_currentSwipe.y) < SwipeThreshold)
+                {
+                    _inputManager.Jump();
+                }
+
+            }
+
+
+
+        }
+    }
 }
