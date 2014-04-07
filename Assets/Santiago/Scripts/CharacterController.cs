@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class ControladorPersonaje : MonoBehaviour
+public class CharacterController : MonoBehaviour
 {
     bool facingRight = true;							// For determining which way the player is currently facing.
 

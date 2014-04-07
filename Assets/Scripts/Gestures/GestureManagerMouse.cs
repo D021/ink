@@ -12,12 +12,12 @@ namespace com.inkrunner.gestures
         private Vector2 _firstPressPosition;
         private Vector2 _secondPressPosition;
         private Vector2 _currentSwipe;
-        private InputsJugador _inputManager;
+        private InputManager _inputManager;
 
 
         void Awake()
         {
-            _inputManager = GetComponent<InputsJugador>();
+            _inputManager = GetComponent<InputManager>();
         }
 
         void Update()
@@ -72,7 +72,6 @@ namespace com.inkrunner.gestures
                 //Tap
                 if (Mathf.Abs(_currentSwipe.x) < SwipeThreshold && Mathf.Abs(_currentSwipe.y) < SwipeThreshold)
                 {
-                    _inputManager.Jump();
                 }
 
             }

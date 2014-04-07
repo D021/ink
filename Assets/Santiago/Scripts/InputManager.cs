@@ -1,23 +1,22 @@
 ﻿using UnityEngine;
 
-namespace com.inkrunner.gestures
+[RequireComponent(typeof(CharacterController))]
+public class InputManager : MonoBehaviour
 {
-    /// <summary>
-    /// Detects the Touch Gestures in the game
-    /// </summary>
-    public class GestureManager : MonoBehaviour
-    {
-        #region Variables
+     #region Variables
 
         //Public variables
         [Range(0,1)]
         public float SwipeThreshold = 0.1f;
+        public bool CanMove;
+        public float AmountMove;
         //Private variables
         private Vector2 _firstPressPosition;
         private Vector2 _secondPressPosition;
         private Vector2 _currentSwipe;
         private InputManager _inputManager;
-        //private GUIText _gestureText;
+        private CharacterController _characterController;
+        private bool _jump;
 
         #endregion
 
@@ -26,14 +25,32 @@ namespace com.inkrunner.gestures
         void Awake()
         {
             _inputManager = GetComponent<InputManager>();
-            //GUI Text only for testing
-            //_gestureText = FindObjectOfType<GUIText>();
-            //_gestureText.fontSize = Screen.width / 8;
+            _characterController = GetComponent<CharacterController>();
         }
 
         void Update()
         {
+            //Testing
+            if (Input.GetButtonDown("Jump")) 
+                _jump = true;
+
             CheckGesture();
+        }
+
+        void FixedUpdate()
+        {
+            // Read the inputs.
+            if (CanMove)
+            {
+                float h = Input.GetAxis("Horizontal");
+                _characterController.Move(h, false, _jump);
+            }
+            else
+                // Pass all parameters to the character control script.
+                _characterController.Move(AmountMove, false, _jump);
+
+            // Reset the jump input once it has been used.
+            _jump = false;
         }
 
         #endregion
@@ -93,8 +110,23 @@ namespace com.inkrunner.gestures
         }
 
         #endregion
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+    
 }
-
-
-
