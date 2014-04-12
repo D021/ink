@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using System.Collections;
 
-[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(CharacterControllerRunner))]
 public class InputManager : MonoBehaviour
 {
      #region Variables
@@ -10,13 +11,21 @@ public class InputManager : MonoBehaviour
         public float SwipeThreshold = 0.1f;
         public bool CanMove;
         public float AmountMove;
+		public GameObject FrontTrigger;
+		public float ChargingTime;
+
+
+
+
+
         //Private variables
         private Vector2 _firstPressPosition;
         private Vector2 _secondPressPosition;
         private Vector2 _currentSwipe;
         private InputManager _inputManager;
-        private CharacterController _characterController;
+        private CharacterControllerRunner _characterController;
         private bool _jump;
+	private GUIText _gestureText;
 
         #endregion
 
@@ -25,7 +34,9 @@ public class InputManager : MonoBehaviour
         void Awake()
         {
             _inputManager = GetComponent<InputManager>();
-            _characterController = GetComponent<CharacterController>();
+            _characterController = GetComponent<CharacterControllerRunner>();
+		_gestureText = FindObjectOfType<GUIText>();
+		//_gestureText.fontSize = Screen.width / 8;
         }
 
         void Update()
@@ -99,15 +110,28 @@ public class InputManager : MonoBehaviour
                     //swipe right
                     if (_currentSwipe.x > SwipeThreshold && Mathf.Abs(_currentSwipe.y) < SwipeThreshold)
                     {
-                    }
+					_gestureText.text = "SWIPE RIGHT!";
+					//Start animation
+					_characterController.boolAnimation("Charge", true);
+					//Activate the trigger in front of the player
+					FrontTrigger.GetComponent<BoxCollider2D>().enabled = true;
+					StartCoroutine(charging());
+					}
 
                     //Tap
                     if (Mathf.Abs(_currentSwipe.x) < SwipeThreshold && Mathf.Abs(_currentSwipe.y) < SwipeThreshold)
                     {
+					_gestureText.text = "TAP!";
+						_jump = true;
                     }
                 }
             }
         }
+
+	IEnumerator charging(){
+		yield return new WaitForSeconds(ChargingTime);
+		_characterController.boolAnimation("Charge", false);
+	}
 
         #endregion
 

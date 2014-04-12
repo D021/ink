@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class CharacterController : MonoBehaviour
+public class CharacterControllerRunner : MonoBehaviour
 {
     bool facingRight = true;							// For determining which way the player is currently facing.
 
@@ -101,6 +101,9 @@ public class CharacterController : MonoBehaviour
         }
     }
 
+	public void boolAnimation(string _stringVariable, bool _bool){
+		anim.SetBool (_stringVariable,_bool);
+	}
 
     void Flip()
     {
