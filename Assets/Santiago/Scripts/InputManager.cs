@@ -37,6 +37,9 @@ public class InputManager : MonoBehaviour
             _characterController = GetComponent<CharacterControllerRunner>();
 		_gestureText = FindObjectOfType<GUIText>();
 		//_gestureText.fontSize = Screen.width / 8;
+
+		//Linea añadida para empezar con el trigger off
+		//FrontTrigger.GetComponent<BoxCollider2D>().enabled = false;
         }
 
         void Update()
