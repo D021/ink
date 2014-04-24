@@ -57,11 +57,11 @@ public class InputManager : MonoBehaviour
             if (CanMove)
             {
                 float h = Input.GetAxis("Horizontal");
-                _characterController.Move(h, false, _jump);
+                _characterController.Move(h, _jump);
             }
             else
                 // Pass all parameters to the character control script.
-                _characterController.Move(AmountMove, false, _jump);
+                _characterController.Move(AmountMove, _jump);
 
             // Reset the jump input once it has been used.
             _jump = false;
