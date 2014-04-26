@@ -86,6 +86,7 @@ public class InputManagerGesture : MonoBehaviour
                     //save began touch 2d point				
                     _firstPressPosition = new Vector2(t.position.x, t.position.y);
 					_gestureText.text = "TAP!";
+	
 					_jump = true;
 			}
 			
