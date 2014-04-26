@@ -66,9 +66,7 @@ public class CharacterControllerRunner : MonoBehaviour
         {
             // Add a vertical force to the player.
             anim.SetBool("Ground", false);
-            //Reiniciar la velocidad del eje y para que sea como un salto normal
-            // y no se vea afectada por la velocidad actual
-            rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0);
+
             rigidbody2D.AddForce(new Vector2(0f, jumpForce));
 
         }
@@ -88,4 +86,9 @@ public class CharacterControllerRunner : MonoBehaviour
         theScale.x *= -1;
         transform.localScale = theScale;
     }
+
+	public void CancelJump(){
+		//Reset the y velocity of the player
+		rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0);
+	}
 }

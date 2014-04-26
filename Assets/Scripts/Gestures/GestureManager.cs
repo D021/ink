@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace com.inkrunner.gestures
 {
@@ -16,7 +16,7 @@ namespace com.inkrunner.gestures
         private Vector2 _firstPressPosition;
         private Vector2 _secondPressPosition;
         private Vector2 _currentSwipe;
-        private InputManager _inputManager;
+        private InputManagerGesture _inputManager;
         //private GUIText _gestureText;
 
         #endregion
@@ -25,7 +25,7 @@ namespace com.inkrunner.gestures
 
         void Awake()
         {
-            _inputManager = GetComponent<InputManager>();
+            _inputManager = GetComponent<InputManagerGesture>();
             //GUI Text only for testing
             //_gestureText = FindObjectOfType<GUIText>();
             //_gestureText.fontSize = Screen.width / 8;

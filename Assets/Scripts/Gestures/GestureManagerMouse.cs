@@ -12,12 +12,12 @@ namespace com.inkrunner.gestures
         private Vector2 _firstPressPosition;
         private Vector2 _secondPressPosition;
         private Vector2 _currentSwipe;
-        private InputManager _inputManager;
+        private InputManagerGesture _inputManager;
 
 
         void Awake()
         {
-            _inputManager = GetComponent<InputManager>();
+			_inputManager = GetComponent<InputManagerGesture>();
         }
 
         void Update()

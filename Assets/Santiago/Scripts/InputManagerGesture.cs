@@ -2,7 +2,7 @@
 using System.Collections;
 
 [RequireComponent(typeof(CharacterControllerRunner))]
-public class InputManager : MonoBehaviour
+public class InputManagerGesture : MonoBehaviour
 {
      #region Variables
 
@@ -13,6 +13,7 @@ public class InputManager : MonoBehaviour
         public float AmountMove;
 		public GameObject FrontTrigger;
 		public float ChargingTime;
+		public float FlyingTime;
 
 
 
@@ -22,7 +23,7 @@ public class InputManager : MonoBehaviour
         private Vector2 _firstPressPosition;
         private Vector2 _secondPressPosition;
         private Vector2 _currentSwipe;
-        private InputManager _inputManager;
+        private InputManagerGesture _inputManager;
         private CharacterControllerRunner _characterController;
         private bool _jump;
 	private GUIText _gestureText;
@@ -33,7 +34,7 @@ public class InputManager : MonoBehaviour
 
         void Awake()
         {
-            _inputManager = GetComponent<InputManager>();
+            _inputManager = GetComponent<InputManagerGesture>();
             _characterController = GetComponent<CharacterControllerRunner>();
 		_gestureText = FindObjectOfType<GUIText>();
 		//_gestureText.fontSize = Screen.width / 8;
@@ -79,12 +80,16 @@ public class InputManager : MonoBehaviour
             if (Input.touches.Length > 0)
             {
                 Touch t = Input.GetTouch(0);
+
                 if (t.phase == TouchPhase.Began)
                 {
                     //save began touch 2d point				
                     _firstPressPosition = new Vector2(t.position.x, t.position.y);
-                }
-                if (t.phase == TouchPhase.Ended)
+					_gestureText.text = "TAP!";
+					_jump = true;
+			}
+			
+			if (t.phase == TouchPhase.Ended)
                 {
                     //save ended touch 2d point				
                     _secondPressPosition = new Vector2(t.position.x, t.position.y);
@@ -97,7 +102,12 @@ public class InputManager : MonoBehaviour
 
                     //swipe ups
                     if (_currentSwipe.y > SwipeThreshold && Mathf.Abs(_currentSwipe.x) < SwipeThreshold)
-                    {
+	                {
+						_gestureText.text = "SWIPE UP!";
+						_characterController.CancelJump();
+						//Start animation
+						_characterController.boolAnimation("Fly", true);
+						StartCoroutine(inkvoking(FlyingTime,"Fly"));
                     }
 
                     //swipe down
@@ -115,25 +125,26 @@ public class InputManager : MonoBehaviour
                     {
 					_gestureText.text = "SWIPE RIGHT!";
 					//Start animation
+					_characterController.CancelJump();
 					_characterController.boolAnimation("Charge", true);
 					//Activate the trigger in front of the player
 					FrontTrigger.GetComponent<BoxCollider2D>().enabled = true;
-					StartCoroutine(charging());
+					StartCoroutine(inkvoking(ChargingTime,"Charge"));
 					}
 
                     //Tap
                     if (Mathf.Abs(_currentSwipe.x) < SwipeThreshold && Mathf.Abs(_currentSwipe.y) < SwipeThreshold)
                     {
-					_gestureText.text = "TAP!";
-						_jump = true;
+//						_gestureText.text = "TAP!";
+//							_jump = true;
                     }
-                }
-            }
-        }
-
-	IEnumerator charging(){
-		yield return new WaitForSeconds(ChargingTime);
-		_characterController.boolAnimation("Charge", false);
+			}
+		}
+	}
+	
+	IEnumerator inkvoking(float _time, string _animation){
+		yield return new WaitForSeconds(_time);
+		_characterController.boolAnimation(_animation, false);
 	}
 
         #endregion
