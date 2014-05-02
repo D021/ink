@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ccc7d1ea57031324aa5d02fc2e2073b0
+guid: a49f28979dd875643ba600587737f509
 TextureImporter:
   serializedVersion: 2
   mipmaps:
@@ -24,13 +24,13 @@ TextureImporter:
   maxTextureSize: 1024
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 1
     mipBias: -1
-    wrapMode: -1
+    wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -44,6 +44,195 @@ TextureImporter:
     textureFormat: -2
     compressionQuality: 50
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: ante-brazo-der
+      rect:
+        serializedVersion: 2
+        x: 475
+        y: 411
+        width: 182
+        height: 120
+      alignment: 9
+      pivot: {x: .538461566, y: .654166698}
+    - name: ante-brazo-izq
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 540
+        width: 126
+        height: 160
+      alignment: 9
+      pivot: {x: .551587284, y: .5}
+    - name: brazo-der
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 807
+        width: 107
+        height: 197
+      alignment: 9
+      pivot: {x: .523364484, y: .51015228}
+    - name: brazo-izq
+      rect:
+        serializedVersion: 2
+        x: 745
+        y: 195
+        width: 187
+        height: 95
+      alignment: 9
+      pivot: {x: .368983954, y: .263157904}
+    - name: cabeza
+      rect:
+        serializedVersion: 2
+        x: 532
+        y: 533
+        width: 117
+        height: 168
+      alignment: 9
+      pivot: {x: .534188032, y: .46726191}
+    - name: capa-bajo
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 375
+        width: 117
+        height: 430
+      alignment: 9
+      pivot: {x: .482905984, y: .412790716}
+    - name: capa-sobre
+      rect:
+        serializedVersion: 2
+        x: 729
+        y: 292
+        width: 170
+        height: 132
+      alignment: 9
+      pivot: {x: .541176498, y: .579545438}
+    - name: collares
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 693
+        width: 158
+        height: 83
+      alignment: 9
+      pivot: {x: .354430377, y: .210843384}
+    - name: falda-bajo
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 246
+        width: 205
+        height: 163
+      alignment: 9
+      pivot: {x: .495121956, y: .457055211}
+    - name: falda-extra
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 250
+        width: 275
+        height: 155
+      alignment: 9
+      pivot: {x: .538181841, y: .577419341}
+    - name: falda-sobre
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 5
+        width: 253
+        height: 243
+      alignment: 9
+      pivot: {x: .496047437, y: .502057612}
+    - name: mano-der
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 932
+        width: 96
+        height: 90
+      alignment: 9
+      pivot: {x: .447916657, y: .538888872}
+    - name: mano-izq
+      rect:
+        serializedVersion: 2
+        x: 934
+        y: 195
+        width: 66
+        height: 81
+      alignment: 9
+      pivot: {x: .537878811, y: .555555582}
+    - name: muslo-der
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 5
+        width: 243
+        height: 239
+      alignment: 9
+      pivot: {x: .491769552, y: .485355645}
+    - name: muslo-izq
+      rect:
+        serializedVersion: 2
+        x: 745
+        y: 5
+        width: 260
+        height: 188
+      alignment: 9
+      pivot: {x: .153846145, y: .0611702204}
+    - name: pie-der
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 687
+        width: 98
+        height: 127
+      alignment: 9
+      pivot: {x: .214285702, y: .417322844}
+    - name: pie-izq
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 816
+        width: 91
+        height: 114
+      alignment: 9
+      pivot: {x: .565934062, y: .530701756}
+    - name: pierna-der
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 375
+        width: 99
+        height: 310
+      alignment: 9
+      pivot: {x: .595959604, y: .5}
+    - name: pierna-izq
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 407
+        width: 251
+        height: 131
+      alignment: 9
+      pivot: {x: .488047808, y: .47709924}
+    - name: tiras-falda
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 540
+        width: 180
+        height: 151
+      alignment: 9
+      pivot: {x: .561111093, y: .493377477}
+    - name: tronco-cadera
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 5
+        width: 241
+        height: 368
+      alignment: 9
+      pivot: {x: .53112036, y: .570652187}
   spritePackingTag: 
   userData: 
