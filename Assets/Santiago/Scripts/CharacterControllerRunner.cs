@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class CharacterControllerRunner : MonoBehaviour
 {
@@ -15,9 +16,12 @@ public class CharacterControllerRunner : MonoBehaviour
     LayerMask whatIsGround;			                    // A mask determining what is ground to the character
 
     Transform groundCheck;								// A position marking where to check if the player is grounded.
-    float groundedRadius = .2f;							// Radius of the overlap circle to determine if grounded
+    public float groundedRadius = .2f;							// Radius of the overlap circle to determine if grounded
     bool grounded = false;								// Whether or not the player is grounded.
-    Animator anim;										// Reference to the player's animator component.
+	public bool checkGrounded = true;
+
+	private ShamanChangeSpineAnimation _shamanSpineController;
+
 
     private bool _verticalJumpRightTrigger;             //True -> Jump Right, False -> Jump Left
 
@@ -25,7 +29,8 @@ public class CharacterControllerRunner : MonoBehaviour
     {
         // Setting up references.
         groundCheck = transform.Find("GroundCheck");
-        anim = GetComponent<Animator>();
+		_shamanSpineController = GetComponent<ShamanChangeSpineAnimation>();
+
     }
 
 
@@ -33,11 +38,6 @@ public class CharacterControllerRunner : MonoBehaviour
     {
         // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundedRadius, whatIsGround);
-        anim.SetBool("Ground", grounded);
-
-        // Set the vertical animation
-        anim.SetFloat("vSpeed", rigidbody2D.velocity.y);
-
     }
 
 
@@ -48,13 +48,13 @@ public class CharacterControllerRunner : MonoBehaviour
         //only control the player if grounded or airControl is turned on
         if (grounded)
         {
+			if(checkGrounded)
+			_shamanSpineController.ChangeSpineAnimation("Run", true);
             verticalJump = false;
             // The Speed animator parameter is set to the absolute value of the horizontal input.
-            anim.SetFloat("Speed", Mathf.Abs(move));
 
             // Move the character
             rigidbody2D.velocity = new Vector2(move * maxSpeed, rigidbody2D.velocity.y);
-
             // If the input is moving the player right and the player is facing left...
             //if (move > 0 && !facingRight)
             // ... flip the player.
@@ -81,17 +81,14 @@ public class CharacterControllerRunner : MonoBehaviour
         if (grounded && jump)
         {
             // Add a vertical force to the player.
-            anim.SetBool("Ground", false);
-
+			checkGrounded = false;
             rigidbody2D.AddForce(new Vector2(0f, jumpForce));
+			_shamanSpineController.ChangeSpineAnimation("Jump", true);
+			StartCoroutine(waitGrounded(0.2f));
 
         }
     }
 
-    public void boolAnimation(string _stringVariable, bool _bool)
-    {
-        anim.SetBool(_stringVariable, _bool);
-    }
 
     //void Flip()
     //{
@@ -114,5 +111,11 @@ public class CharacterControllerRunner : MonoBehaviour
     {
         _verticalJumpRightTrigger = _side;
     }
+
+	IEnumerator waitGrounded(float _time)
+	{
+		yield return new WaitForSeconds(_time);
+		checkGrounded = true;
+	}
 
 }

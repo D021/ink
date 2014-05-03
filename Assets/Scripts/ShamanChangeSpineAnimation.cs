@@ -4,7 +4,7 @@ using System.Collections;
 public class ShamanChangeSpineAnimation : MonoBehaviour {
 
 	SkeletonAnimation skeletonAnimation;
-
+	string actualAnimation = "Run";
 
 	// Use this for initialization
 	void Start () {
@@ -12,26 +12,13 @@ public class ShamanChangeSpineAnimation : MonoBehaviour {
 
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		if(Input.GetKeyDown(KeyCode.UpArrow)){
+	public void ChangeSpineAnimation(string p_animation, bool p_loop){
+		if (actualAnimation != p_animation) 
+		{
+			skeletonAnimation.skeleton.SetToSetupPose();
+			skeletonAnimation.state.SetAnimation(0,p_animation,p_loop);
+			actualAnimation = p_animation;
+		}
 
-			skeletonAnimation.skeleton.SetToSetupPose();
-			skeletonAnimation.state.SetAnimation(0,"Jump",false);
-
-		}
-		if(Input.GetKeyDown(KeyCode.LeftArrow)){
-			
-			skeletonAnimation.skeleton.SetToSetupPose();
-			skeletonAnimation.state.SetAnimation(0,"Run", true);
-			
-		}
-		if(Input.GetKeyDown(KeyCode.DownArrow)){
-			
-			skeletonAnimation.skeleton.SetToSetupPose();
-			skeletonAnimation.state.SetAnimation(0,"Rush", false);
-			
-		}
-			
 	}
 }

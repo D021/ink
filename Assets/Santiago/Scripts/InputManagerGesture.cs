@@ -23,7 +23,8 @@ public class InputManagerGesture : MonoBehaviour
     private CharacterControllerRunner _characterController;
     private bool _jump;
     private GUIText _gestureText;
-
+	private ShamanChangeSpineAnimation _shamanSpineController;
+	private string activeInkoke;
     #endregion
 
     #region MonoBehavior Methods
@@ -33,6 +34,7 @@ public class InputManagerGesture : MonoBehaviour
         _inputManager = GetComponent<InputManagerGesture>();
         _characterController = GetComponent<CharacterControllerRunner>();
         _gestureText = FindObjectOfType<GUIText>();
+		_shamanSpineController = GetComponent<ShamanChangeSpineAnimation>();
         //_gestureText.fontSize = Screen.width / 8;
         //Linea añadida para empezar con el trigger off
         //FrontTrigger.GetComponent<BoxCollider2D>().enabled = false;
@@ -101,8 +103,8 @@ public class InputManagerGesture : MonoBehaviour
                     _gestureText.text = "SWIPE UP!";
                     _characterController.CancelJump();
                     //Start animation
-                    _characterController.boolAnimation("Fly", true);
-                    StartCoroutine(inkvoking(FlyingTime, "Fly"));
+					_shamanSpineController.ChangeSpineAnimation("Fly", true);
+					StartCoroutine(inkvoking(FlyingTime, "Fly"));
                 }
 
                 //swipe down
@@ -119,12 +121,18 @@ public class InputManagerGesture : MonoBehaviour
                 if (_currentSwipe.x > SwipeThreshold && Mathf.Abs(_currentSwipe.y) < SwipeThreshold)
                 {
                     _gestureText.text = "SWIPE RIGHT!";
-                    //Start animation
-                    _characterController.CancelJump();
-                    _characterController.boolAnimation("Charge", true);
-                    //Activate the trigger in front of the player
-                    FrontTrigger.GetComponent<BoxCollider2D>().enabled = true;
-                    StartCoroutine(inkvoking(ChargingTime, "Charge"));
+                   
+					if(activeInkoke != "Rush")
+					{
+						//Start animation
+						_characterController.CancelJump();
+						activeInkoke = "Rush";
+						_shamanSpineController.ChangeSpineAnimation("Rush", true);
+						//Activate the trigger in front of the player
+						FrontTrigger.GetComponent<BoxCollider2D>().enabled = true;
+						StartCoroutine(inkvoking(ChargingTime, "Run"));
+					}
+
                 }
 
                 //Tap
@@ -139,9 +147,12 @@ public class InputManagerGesture : MonoBehaviour
 
     IEnumerator inkvoking(float _time, string _animation)
     {
+		_characterController.checkGrounded = false;
         yield return new WaitForSeconds(_time);
-        _characterController.boolAnimation(_animation, false);
-    }
+		_characterController.checkGrounded = true;
+		activeInkoke = "";
+	
+	}
 
     #endregion
 
