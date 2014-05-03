@@ -27,6 +27,8 @@ public class InputManagerMouse : MonoBehaviour
     private CharacterControllerRunner _characterController;
     private bool _jump;
     private GUIText _gestureText;
+	private ShamanChangeSpineAnimation _shamanSpineController;
+
 
     #endregion
 
@@ -37,6 +39,8 @@ public class InputManagerMouse : MonoBehaviour
         _inputManager = GetComponent<InputManagerMouse>();
         _characterController = GetComponent<CharacterControllerRunner>();
         _gestureText = FindObjectOfType<GUIText>();
+		_shamanSpineController = GetComponent<ShamanChangeSpineAnimation>();
+
         //_gestureText.fontSize = Screen.width / 8;
 
         //Linea añadida para empezar con el trigger off
@@ -106,8 +110,8 @@ public class InputManagerMouse : MonoBehaviour
                 _gestureText.text = "SWIPE UP!";
                 _characterController.CancelJump();
                 //Start animation
-                _characterController.boolAnimation("Fly", true);
-                StartCoroutine(inkvoking(FlyingTime, "Fly"));
+				_shamanSpineController.ChangeSpineAnimation("Fly", true);
+				StartCoroutine(inkvoking(FlyingTime, "Fly"));
             }
 
             //swipe down
@@ -126,10 +130,10 @@ public class InputManagerMouse : MonoBehaviour
                 _gestureText.text = "SWIPE RIGHT!";
                 //Start animation
                 _characterController.CancelJump();
-                _characterController.boolAnimation("Charge", true);
-                //Activate the trigger in front of the player
+				_shamanSpineController.ChangeSpineAnimation("Rush", true);
+				//Activate the trigger in front of the player
                 FrontTrigger.GetComponent<BoxCollider2D>().enabled = true;
-                StartCoroutine(inkvoking(ChargingTime, "Charge"));
+                StartCoroutine(inkvoking(ChargingTime, "Rush"));
             }
 
             //Tap
@@ -146,8 +150,8 @@ public class InputManagerMouse : MonoBehaviour
     IEnumerator inkvoking(float _time, string _animation)
     {
         yield return new WaitForSeconds(_time);
-        _characterController.boolAnimation(_animation, false);
-    }
+		_shamanSpineController.ChangeSpineAnimation(_animation, true);
+	}
 
     #endregion
 
