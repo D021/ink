@@ -56,13 +56,13 @@ public class CharacterControllerRunner : MonoBehaviour
             // Move the character
             rigidbody2D.velocity = new Vector2(move * maxSpeed, rigidbody2D.velocity.y);
             // If the input is moving the player right and the player is facing left...
-            //if (move > 0 && !facingRight)
+            if (move > 0 && !facingRight)
             // ... flip the player.
-            //Flip();
+            Flip();
             // Otherwise if the input is moving the player left and the player is facing right...
-            //else if (move < 0 && facingRight)
+            else if (move < 0 && facingRight)
             // ... flip the player.
-            //Flip();
+            Flip();
         }
 
         if (verticalJump && jump)
@@ -72,7 +72,7 @@ public class CharacterControllerRunner : MonoBehaviour
             else
                 rigidbody2D.velocity = new Vector2(move * maxSpeed, 0);
 
-            //Flip();
+            Flip();
             rigidbody2D.AddForce(new Vector2(0f, jumpForce));
             verticalJump = false;
         }
@@ -90,16 +90,16 @@ public class CharacterControllerRunner : MonoBehaviour
     }
 
 
-    //void Flip()
-    //{
-    //    // Switch the way the player is labelled as facing.
-    //    facingRight = !facingRight;
+    void Flip()
+    {
+        // Switch the way the player is labelled as facing.
+        facingRight = !facingRight;
 
-    //    // Multiply the player's x local scale by -1.
-    //    Vector3 theScale = transform.localScale;
-    //    theScale.x *= -1;
-    //    transform.localScale = theScale;
-    //}
+        // Multiply the player's x local scale by -1.
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
+    }
 
     public void CancelJump()
     {

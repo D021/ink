@@ -7,6 +7,7 @@ using System.Collections;
 public class CameraFollowScript : MonoBehaviour {
 	
 	public float xMargen;
+	public float yMargen;
 	public float yMargenUp;
 	public float yMargenDown;
 	public float yMin;
@@ -51,9 +52,9 @@ public class CameraFollowScript : MonoBehaviour {
 
 		MargenY ();
 		if(!goingDown)
-			targetY = Mathf.Lerp(transform.position.y, player.transform.position.y, Time.deltaTime * YsmoothValueUp);
+			targetY = Mathf.Lerp(transform.position.y, player.transform.position.y + yMargen, Time.deltaTime * YsmoothValueUp);
 		else
-			targetY = Mathf.Lerp(transform.position.y, player.transform.position.y, Time.deltaTime * YsmoothValueDown);
+			targetY = Mathf.Lerp(transform.position.y, player.transform.position.y + yMargen, Time.deltaTime * YsmoothValueDown);
 
 		//Limitamos el valor de la camara en el eje y para que no baje demasiado
 		//targetY = Mathf.Clamp(targetY,yMin,100);
