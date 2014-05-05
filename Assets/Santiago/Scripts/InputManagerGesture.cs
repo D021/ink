@@ -104,6 +104,10 @@ public class InputManagerGesture : MonoBehaviour
                     _characterController.CancelJump();
                     //Start animation
 					_shamanSpineController.ChangeSpineAnimation("Fly", true);
+
+					//Notify player items control to decreasse the level of ink
+					this.GetComponent<PlayerItems>().usingInk("Fly");
+
 					StartCoroutine(inkvoking(FlyingTime, "Fly"));
                 }
 
@@ -130,6 +134,9 @@ public class InputManagerGesture : MonoBehaviour
 						_shamanSpineController.ChangeSpineAnimation("Rush", true);
 						//Activate the trigger in front of the player
 						FrontTrigger.GetComponent<BoxCollider2D>().enabled = true;
+
+						//Notify player items control to decreasse the level of ink
+						this.GetComponent<PlayerItems>().usingInk("Rush");
 						StartCoroutine(inkvoking(ChargingTime, "Run"));
 					}
 
