@@ -14,6 +14,7 @@ public class InputManagerMouse : MonoBehaviour
     public GameObject FrontTrigger;
     public float ChargingTime;
     public float FlyingTime;
+	private string activeInkoke;
 
 
 
@@ -107,10 +108,14 @@ public class InputManagerMouse : MonoBehaviour
             //swipe ups
             if (_currentSwipe.y > SwipeThreshold && Mathf.Abs(_currentSwipe.x) < SwipeThreshold)
             {
-                _gestureText.text = "SWIPE UP!";
-                _characterController.CancelJump();
-                //Start animation
+				_gestureText.text = "SWIPE UP!";
+				_characterController.CancelJump();
+				//Start animation
 				_shamanSpineController.ChangeSpineAnimation("Fly", true);
+				
+				//Notify player items control to decreasse the level of ink
+				this.GetComponent<PlayerItems>().usingInk("Fly");
+				
 				StartCoroutine(inkvoking(FlyingTime, "Fly"));
             }
 
@@ -127,13 +132,21 @@ public class InputManagerMouse : MonoBehaviour
             //swipe right
             if (_currentSwipe.x > SwipeThreshold && Mathf.Abs(_currentSwipe.y) < SwipeThreshold)
             {
-                _gestureText.text = "SWIPE RIGHT!";
-                //Start animation
-                _characterController.CancelJump();
-				_shamanSpineController.ChangeSpineAnimation("Rush", true);
-				//Activate the trigger in front of the player
-                FrontTrigger.GetComponent<BoxCollider2D>().enabled = true;
-                StartCoroutine(inkvoking(ChargingTime, "Rush"));
+				_gestureText.text = "SWIPE RIGHT!";
+				
+				if(activeInkoke != "Rush")
+				{
+					//Start animation
+					_characterController.CancelJump();
+					activeInkoke = "Rush";
+					_shamanSpineController.ChangeSpineAnimation("Rush", true);
+					//Activate the trigger in front of the player
+					FrontTrigger.GetComponent<BoxCollider2D>().enabled = true;
+					
+					//Notify player items control to decreasse the level of ink
+					this.GetComponent<PlayerItems>().usingInk("Rush");
+					StartCoroutine(inkvoking(ChargingTime, "Run"));
+				}
             }
 
             //Tap
@@ -147,11 +160,16 @@ public class InputManagerMouse : MonoBehaviour
 
 
 
-    IEnumerator inkvoking(float _time, string _animation)
-    {
-        yield return new WaitForSeconds(_time);
-		_shamanSpineController.ChangeSpineAnimation(_animation, true);
+	
+	IEnumerator inkvoking(float _time, string _animation)
+	{
+		_characterController.checkGrounded = false;
+		yield return new WaitForSeconds(_time);
+		_characterController.checkGrounded = true;
+		activeInkoke = "";
+		
 	}
+
 
     #endregion
 
