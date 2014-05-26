@@ -1,0 +1,19 @@
+{"frames": {
+	"Ink.png":{
+		"rotated": false,"trimmed": true,
+		"frame": {"x":0,"y":76,"w":192,"h":39},
+		"spriteSourceSize": {"x":2,"y":4,"w":194,"h":43},
+		"sourceSize": {"w":194,"h":43}
+	},
+	"progress.png":{
+		"rotated": false,"trimmed": true,
+		"frame": {"x":0,"y":0,"w":422,"h":74},
+		"spriteSourceSize": {"x":1,"y":18,"w":425,"h":113},
+		"sourceSize": {"w":425,"h":113}
+	}
+},
+"meta": {
+	"app": "ShoeBox",
+	"size": {"w":512,"h":512}
+}
+}

@@ -5,12 +5,12 @@ public class PlayerItems : MonoBehaviour {
 
 	int item1Count=0;
 	int item2Count=0;
-	public int inklevel=50;
-	public int inklevelup=5;
+	public float inklevel=0.27f;
+	public float inklevelup=0.15f;
 
-	public int inkCostRush=5;
-	public int inkCostFly=10;
-	public int inkCostStop=10;
+//	public int inkCostRush=5;
+//	public int inkCostFly=10;
+//	public int inkCostStop=10;
 
 	
 	// Update is called once per frame
@@ -25,13 +25,14 @@ public class PlayerItems : MonoBehaviour {
 	{
 		switch (itemType) {
 		case 0:
-			inklevel=inklevel+inklevelup;
-			GameObject.Find("GUIText_Ink").GetComponent<GUIText>().text=inklevel.ToString();
+			inklevel+=inklevelup;
+			GameObject.Find("InkBar").GetComponent<UISlider>().value=inklevel;
+			GameObject.Find("InkPercentage").GetComponent<UILabel>().text=inklevel*100+"%";
 			break;
 		
 		case 1:
 			item1Count++;
-			GameObject.Find("GUIText_1").GetComponent<GUIText>().text=item1Count.ToString();
+			GameObject.Find("Coins").GetComponent<UILabel>().text="x"+item1Count;
 			break;
 		case 2:
 			item2Count++;
@@ -47,8 +48,8 @@ public class PlayerItems : MonoBehaviour {
 		switch (action) {
 				
 		case "Rush":
-			inklevel=inklevel-inkCostRush;
-			GameObject.Find("GUIText_Ink").GetComponent<GUIText>().text=inklevel.ToString();
+			//inklevel=inklevel-inkCostRush;
+			//GameObject.Find("GUIText_Ink").GetComponent<GUIText>().text=inklevel.ToString();
 			break;
 		default:
 			break;
