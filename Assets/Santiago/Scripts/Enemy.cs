@@ -33,17 +33,29 @@ public class Enemy : MonoBehaviour {
 		Collider2D[] frontHits = Physics2D.OverlapPointAll(frontCheck.position, 1);
 		
 		// Check each of the colliders.
+
+
 		foreach(Collider2D c in frontHits)
 		{
 			// If any of the colliders is the player front_trigger...
+			if(c.tag=="Player")
+			{
+				if(!c.GetComponent<PlayerLifeControl>().attacking){
+					c.GetComponent<PlayerLifeControl>().enemyHit(this.gameObject);
+				}
+				break;
+			}
 
-			if(c.tag == "Player_Front")
+			 if(c.tag == "Player_Front")
 			{
 				// ... Flip the enemy and stop checking the other colliders.
 				//Flip ();
-				HP--;
+
+					HP--;
+
 				break;
 			}
+
 		}
 		
 		// Set the enemy's velocity to moveSpeed in the x direction.

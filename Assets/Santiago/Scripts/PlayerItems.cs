@@ -20,7 +20,7 @@ public class PlayerItems : MonoBehaviour {
 	//int itemtype
 	//0 : ink
 	//1: shields
-	//2: ???
+	//2: special item
 	public void addItem(int itemType)
 	{
 		switch (itemType) {
@@ -32,11 +32,12 @@ public class PlayerItems : MonoBehaviour {
 		
 		case 1:
 			item1Count++;
-			GameObject.Find("Coins").GetComponent<UILabel>().text="x"+item1Count;
+			GameObject.Find("CoinsCounter").GetComponent<UILabel>().text="x"+item1Count;
 			break;
 		case 2:
 			item2Count++;
 			//GameObject.Find("GUIText_2").GetComponent<GUIText>().text=item2Count.ToString();
+			print ("cogi item especial");
 			break;
 		default:
 			break;

@@ -45,7 +45,7 @@ public class InputManagerMouse : MonoBehaviour
         //_gestureText.fontSize = Screen.width / 8;
 
         //Linea añadida para empezar con el trigger off
-        //FrontTrigger.GetComponent<BoxCollider2D>().enabled = false;
+        FrontTrigger.GetComponent<BoxCollider2D>().enabled = false;
     }
 
     void Update()
@@ -108,7 +108,7 @@ public class InputManagerMouse : MonoBehaviour
             //swipe ups
             if (_currentSwipe.y > SwipeThreshold && Mathf.Abs(_currentSwipe.x) < SwipeThreshold)
             {
-				_gestureText.text = "SWIPE UP!";
+				print ( "SWIPE UP!");
 				_characterController.CancelJump();
 				//Start animation
 				_shamanSpineController.ChangeSpineAnimation("Fly", true);
@@ -132,27 +132,34 @@ public class InputManagerMouse : MonoBehaviour
             //swipe right
             if (_currentSwipe.x > SwipeThreshold && Mathf.Abs(_currentSwipe.y) < SwipeThreshold)
             {
-				_gestureText.text = "SWIPE RIGHT!";
+				print ( "SWIPE RIGHT!");
+				FrontTrigger.GetComponent<BoxCollider2D>().enabled = true;
 				
 				if(activeInkoke != "Rush")
 				{
 					//Start animation
 					_characterController.CancelJump();
 					activeInkoke = "Rush";
+
 					_shamanSpineController.ChangeSpineAnimation("Rush", true);
 					//Activate the trigger in front of the player
-					FrontTrigger.GetComponent<BoxCollider2D>().enabled = true;
+
 					
 					//Notify player items control to decreasse the level of ink
 					this.GetComponent<PlayerItems>().usingInk("Rush");
+					GetComponent<PlayerLifeControl>().attacking=true;
+
 					StartCoroutine(inkvoking(ChargingTime, "Run"));
+
 				}
+
+
             }
 
             //Tap
             if (Mathf.Abs(_currentSwipe.x) < SwipeThreshold && Mathf.Abs(_currentSwipe.y) < SwipeThreshold)
             {
-                _gestureText.text = "TAP!";
+                print ( "TAP!");
                 _jump = true;
             }
         }
@@ -167,6 +174,8 @@ public class InputManagerMouse : MonoBehaviour
 		yield return new WaitForSeconds(_time);
 		_characterController.checkGrounded = true;
 		activeInkoke = "";
+		FrontTrigger.GetComponent<BoxCollider2D>().enabled = false;
+		GetComponent<PlayerLifeControl> ().attacking = false;
 		
 	}
 

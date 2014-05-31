@@ -25,7 +25,12 @@ public class CharacterControllerRunner : MonoBehaviour
 
     private bool _verticalJumpRightTrigger;             //True -> Jump Right, False -> Jump Left
 
-    void Awake()
+	public bool receiving_damage=false;
+
+	public float respawnTime=0.7f;
+
+
+	void Awake()
     {
         // Setting up references.
         groundCheck = transform.Find("GroundCheck");
@@ -45,49 +50,59 @@ public class CharacterControllerRunner : MonoBehaviour
     {
 
 
-        //only control the player if grounded or airControl is turned on
-        if (grounded)
-        {
-			if(checkGrounded)
-			_shamanSpineController.ChangeSpineAnimation("Run", true);
-            verticalJump = false;
-            // The Speed animator parameter is set to the absolute value of the horizontal input.
+				//only control the player if grounded or airControl is turned on
+				if (grounded && !receiving_damage) {
+						if (checkGrounded)
+								_shamanSpineController.ChangeSpineAnimation ("Run", true);
+						verticalJump = false;
+						// The Speed animator parameter is set to the absolute value of the horizontal input.
 
-            // Move the character
-            rigidbody2D.velocity = new Vector2(move * maxSpeed, rigidbody2D.velocity.y);
-            // If the input is moving the player right and the player is facing left...
-            if (move > 0 && !facingRight)
+						// Move the character
+						rigidbody2D.velocity = new Vector2 (move * maxSpeed, rigidbody2D.velocity.y);
+						// If the input is moving the player right and the player is facing left...
+						if (move > 0 && !facingRight)
             // ... flip the player.
-            Flip();
+								Flip ();
             // Otherwise if the input is moving the player left and the player is facing right...
             else if (move < 0 && facingRight)
             // ... flip the player.
-            Flip();
-        }
+								Flip ();
+				}
 
-        if (verticalJump && jump)
-        {
-            if (_verticalJumpRightTrigger)
-                rigidbody2D.velocity = new Vector2(-move * maxSpeed, 0);
-            else
-                rigidbody2D.velocity = new Vector2(move * maxSpeed, 0);
+				if (verticalJump && jump) {
+						if (_verticalJumpRightTrigger)
+								rigidbody2D.velocity = new Vector2 (-move * maxSpeed, 0);
+						else
+								rigidbody2D.velocity = new Vector2 (move * maxSpeed, 0);
 
-            Flip();
-            rigidbody2D.AddForce(new Vector2(0f, jumpForce));
-            verticalJump = false;
-        }
+						Flip ();
+						rigidbody2D.AddForce (new Vector2 (0f, jumpForce));
+						verticalJump = false;
+				}
 
-        // If the player should jump...
-        if (grounded && jump)
-        {
-            // Add a vertical force to the player.
-			checkGrounded = false;
-            rigidbody2D.AddForce(new Vector2(0f, jumpForce));
-			_shamanSpineController.ChangeSpineAnimation("Jump", true);
-			StartCoroutine(waitGrounded(0.2f));
+				// If the player should jump...
+				if (grounded && jump) {
+						// Add a vertical force to the player.
+						checkGrounded = false;
+						rigidbody2D.AddForce (new Vector2 (0f, jumpForce));
+						_shamanSpineController.ChangeSpineAnimation ("Jump", true);
+						StartCoroutine (waitGrounded (0.2f));
 
-        }
+				}
+				if (grounded && receiving_damage) {
+			         rigidbody2D.velocity = new Vector2 (move * (maxSpeed*0.5f), rigidbody2D.velocity.y);
+					 //rigidbody2D.AddForce (new Vector2 (move * (maxSpeed*0.5f),rigidbody2D.velocity.y));
+					 StartCoroutine (being_hurt());
+					
+				}
+
     }
+
+	public IEnumerator being_hurt()
+	{
+		yield return new WaitForSeconds(respawnTime);
+		receiving_damage=false;
+	}
 
 
     void Flip()
