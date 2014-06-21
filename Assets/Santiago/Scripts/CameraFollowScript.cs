@@ -14,7 +14,8 @@ public class CameraFollowScript : MonoBehaviour {
 	public float XsmoothValue;
 	public float YsmoothValueUp;
 	public float YsmoothValueDown;
-
+	private float yVelocity;
+	private float xVelocity;
 
 	bool goingDown = false;
 
@@ -35,7 +36,7 @@ public class CameraFollowScript : MonoBehaviour {
 		//Retorna verdadero si la diferencia entre las posiciones es mayor al margen
 		//Eso significaria que es hora de movernos!
 		float diference = transform.position.y - player.transform.position.y;
-		if (diference < yMargenDown)
+		if (diference < yMargen)
 			goingDown = false;
 		else
 			goingDown = true;
@@ -46,15 +47,21 @@ public class CameraFollowScript : MonoBehaviour {
 		float targetX;
 		float targetY;
 //		if(MargenX()) //Hacemos un cambio suave o "smooth" entre la posicion actual y la del personaje
-		targetX = Mathf.Lerp(transform.position.x, player.transform.position.x + xMargen, Time.deltaTime * XsmoothValue);
+//		targetX = Mathf.Lerp(transform.position.x, player.transform.position.x + xMargen, Time.deltaTime * XsmoothValue);
+		targetX = Mathf.SmoothDamp(transform.position.x, player.transform.position.x + xMargen, ref xVelocity, Time.smoothDeltaTime * XsmoothValue);
+
 //		else //De lo contrario dejamos la camara en su posicion actual
 //			targetX = transform.position.x;
-
 		MargenY ();
 		if(!goingDown)
-			targetY = Mathf.Lerp(transform.position.y, player.transform.position.y + yMargen, Time.deltaTime * YsmoothValueUp);
+			targetY = Mathf.SmoothDamp(transform.position.y, player.transform.position.y + yMargenUp, ref yVelocity, YsmoothValueUp);
 		else
-			targetY = Mathf.Lerp(transform.position.y, player.transform.position.y + yMargen, Time.deltaTime * YsmoothValueDown);
+			targetY = Mathf.SmoothDamp(transform.position.y, player.transform.position.y + yMargenDown, ref yVelocity,YsmoothValueDown);
+
+//		if(!goingDown)
+//			targetY = Mathf.Lerp(transform.position.y, player.transform.position.y + yMargenUp, Time.smoothDeltaTime * YsmoothValueUp);
+//		else
+//			targetY = Mathf.Lerp(transform.position.y, player.transform.position.y + yMargenDown, Time.smoothDeltaTime * YsmoothValueDown);
 
 		//Limitamos el valor de la camara en el eje y para que no baje demasiado
 		//targetY = Mathf.Clamp(targetY,yMin,100);
