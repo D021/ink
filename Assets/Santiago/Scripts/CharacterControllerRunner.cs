@@ -29,6 +29,12 @@ public class CharacterControllerRunner : MonoBehaviour
 
 	public float respawnTime=0.7f;
 
+	public GameObject[] stepsFX;
+	public Transform stepsFXPositions;
+	public bool stepsChecks;
+	public float stepsRadius;
+	public float timeStepFX;
+	private bool canInstantiateFX = true;
 
 	void Awake()
     {
@@ -52,8 +58,27 @@ public class CharacterControllerRunner : MonoBehaviour
 
 				//only control the player if grounded or airControl is turned on
 				if (grounded && !receiving_damage) {
-						if (checkGrounded)
-								_shamanSpineController.ChangeSpineAnimation ("Run", true);
+					if (checkGrounded)
+					{
+						_shamanSpineController.ChangeSpineAnimation ("Run", true);
+						
+						if(canInstantiateFX)
+						{
+							stepsChecks = Physics2D.OverlapCircle(stepsFXPositions.position, stepsRadius, whatIsGround);
+							if(stepsChecks)
+							{
+								Instantiate(stepsFX[0],stepsFXPositions.position,Quaternion.identity);
+								Instantiate(stepsFX[1],stepsFXPositions.position,Quaternion.identity);
+							}
+
+							canInstantiateFX = false;
+							StartCoroutine(waitStepGrounded());
+						}
+						
+
+					}
+					
+						
 						verticalJump = false;
 						// The Speed animator parameter is set to the absolute value of the horizontal input.
 
@@ -131,6 +156,12 @@ public class CharacterControllerRunner : MonoBehaviour
 	{
 		yield return new WaitForSeconds(_time);
 		checkGrounded = true;
+	}
+
+	IEnumerator waitStepGrounded()
+	{
+		yield return new WaitForSeconds(timeStepFX);
+		canInstantiateFX = true;
 	}
 
 }
