@@ -1,0 +1,173 @@
+
+skeleton.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+base
+  rotate: false
+  xy: 539, 568
+  size: 500, 434
+  orig: 500, 434
+  offset: 0, 0
+  index: -1
+cabeza
+  rotate: false
+  xy: 1041, 781
+  size: 352, 221
+  orig: 352, 221
+  offset: 0, 0
+  index: -1
+ejemplo
+  rotate: false
+  xy: 2, 551
+  size: 535, 451
+  orig: 535, 451
+  offset: 0, 0
+  index: -1
+matorral
+  rotate: false
+  xy: 1041, 592
+  size: 196, 187
+  orig: 202, 198
+  offset: 0, 6
+  index: -1
+rama01
+  rotate: false
+  xy: 2, 6
+  size: 298, 90
+  orig: 298, 90
+  offset: 0, 0
+  index: -1
+rama02
+  rotate: true
+  xy: 1041, 528
+  size: 62, 77
+  orig: 62, 77
+  offset: 0, 0
+  index: -1
+rama03
+  rotate: false
+  xy: 1395, 911
+  size: 257, 91
+  orig: 257, 91
+  offset: 0, 0
+  index: -1
+rama04
+  rotate: false
+  xy: 1654, 906
+  size: 202, 96
+  orig: 202, 96
+  offset: 0, 0
+  index: -1
+rama05
+  rotate: false
+  xy: 1471, 571
+  size: 92, 68
+  orig: 92, 68
+  offset: 0, 0
+  index: -1
+rama06a
+  rotate: false
+  xy: 1395, 842
+  size: 235, 67
+  orig: 235, 67
+  offset: 0, 0
+  index: -1
+rama06b
+  rotate: false
+  xy: 1632, 845
+  size: 213, 59
+  orig: 213, 59
+  offset: 0, 0
+  index: -1
+rama06c
+  rotate: true
+  xy: 1239, 618
+  size: 161, 121
+  orig: 161, 121
+  offset: 0, 0
+  index: -1
+rama07a
+  rotate: false
+  xy: 1565, 553
+  size: 63, 86
+  orig: 63, 86
+  offset: 0, 0
+  index: -1
+rama07b
+  rotate: false
+  xy: 1362, 551
+  size: 107, 90
+  orig: 109, 96
+  offset: 2, 6
+  index: -1
+rama07c
+  rotate: false
+  xy: 302, 2
+  size: 200, 94
+  orig: 200, 94
+  offset: 0, 0
+  index: -1
+rama07d
+  rotate: false
+  xy: 1990, 906
+  size: 41, 96
+  orig: 58, 96
+  offset: 13, 0
+  index: -1
+rama08a
+  rotate: false
+  xy: 1858, 898
+  size: 130, 104
+  orig: 130, 104
+  offset: 0, 0
+  index: -1
+rama08b
+  rotate: false
+  xy: 1395, 779
+  size: 231, 61
+  orig: 231, 61
+  offset: 0, 0
+  index: -1
+rama08c
+  rotate: false
+  xy: 1239, 506
+  size: 111, 110
+  orig: 111, 110
+  offset: 0, 0
+  index: -1
+rama08d
+  rotate: false
+  xy: 1352, 490
+  size: 89, 59
+  orig: 89, 59
+  offset: 0, 0
+  index: -1
+rama09a
+  rotate: true
+  xy: 1499, 641
+  size: 136, 116
+  orig: 136, 116
+  offset: 0, 0
+  index: -1
+rama09b
+  rotate: false
+  xy: 1847, 841
+  size: 140, 55
+  orig: 140, 55
+  offset: 0, 0
+  index: -1
+rama09c
+  rotate: false
+  xy: 1362, 643
+  size: 135, 134
+  orig: 135, 134
+  offset: 0, 0
+  index: -1
+sobraderaices
+  rotate: false
+  xy: 2, 98
+  size: 515, 451
+  orig: 515, 451
+  offset: 0, 0
+  index: -1

@@ -21,7 +21,7 @@ public class OneSideCollider : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
-        Debug.Log("TriggerStay");
+        //Debug.Log("TriggerStay");
         oneWay = true;
     }
 
