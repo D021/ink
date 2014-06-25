@@ -39,7 +39,15 @@ namespace com.inkrunner.camera
 				case 6:
 					Time.timeScale = 1;
 					break;
-					
+				
+				case 11:
+					_loopSlides[2].StopDemoShaman();
+					break;
+				
+				case 12:
+					_loopSlides[2].StartDemoShaman();
+					break;
+
 				}
 			}
 

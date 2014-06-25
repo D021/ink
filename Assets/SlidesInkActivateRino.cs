@@ -7,7 +7,10 @@ public class SlidesInkActivateRino : MonoBehaviour {
 	private bool rushing;
 	public float AmountMove;
 	float maxSpeed = 10f;				                // The fastest the player can travel in the x axis.
-
+	public GameObject rinoFX;
+	private GameObject rinoInstance;
+	public Transform rinoPosInstance;
+	public GameObject textPower;
 	// Use this for initialization
 	void Start () {
 		_characterController = GetComponent<CharacterControllerRunner>();
@@ -32,7 +35,6 @@ public class SlidesInkActivateRino : MonoBehaviour {
 		if(active.gameObject.name == "ActivateRinoTrigger" && !rushing)
 		{
 			StartCoroutine(inkvoking());
-
 			_shamanSpineController.ChangeSpineAnimation("Rush", false);
 			//Activate the trigger in front of the player
 
@@ -42,9 +44,14 @@ public class SlidesInkActivateRino : MonoBehaviour {
 	IEnumerator inkvoking()
 	{
 		rushing = true;
+		rinoInstance = (GameObject)Instantiate(rinoFX,rinoPosInstance.position,Quaternion.identity);
+		rinoInstance.transform.parent = transform;
+		GameObject text = (GameObject)Instantiate(textPower);
+		Destroy(text,1f);
 		yield return new WaitForSeconds(0.8f);
 		rushing = false;
 		_shamanSpineController.ChangeSpineAnimation("Run", true);
+		Destroy(rinoInstance, 0.4f);
 
 	}
 }

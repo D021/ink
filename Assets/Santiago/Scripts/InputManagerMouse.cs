@@ -147,7 +147,7 @@ public class InputManagerMouse : MonoBehaviour
 					
 					//Notify player items control to decreasse the level of ink
 					this.GetComponent<PlayerItems>().usingInk("Rush");
-					GetComponent<PlayerLifeControl>().attacking=true;
+//					GetComponent<PlayerLifeControl>().attacking=true;
 
 					StartCoroutine(inkvoking(ChargingTime, "Run"));
 
@@ -175,7 +175,7 @@ public class InputManagerMouse : MonoBehaviour
 		_characterController.checkGrounded = true;
 		activeInkoke = "";
 		FrontTrigger.GetComponent<BoxCollider2D>().enabled = false;
-		GetComponent<PlayerLifeControl> ().attacking = false;
+//		GetComponent<PlayerLifeControl> ().attacking = false;
 		
 	}
 
