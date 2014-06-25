@@ -111,7 +111,7 @@ public class InputManagerMouse : MonoBehaviour
 				print ( "SWIPE UP!");
 				_characterController.CancelJump();
 				//Start animation
-				_shamanSpineController.ChangeSpineAnimation("Fly", true);
+				_shamanSpineController.ChangeSpineAnimation("Fly", false);
 				
 				//Notify player items control to decreasse the level of ink
 				this.GetComponent<PlayerItems>().usingInk("Fly");

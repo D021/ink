@@ -51,7 +51,12 @@ public class CameraSlidesScript : MonoBehaviour {
 		transform.rotation = Quaternion.Slerp(this.transform.rotation,points[actualPoint].rotation, smoothRotateValue);
 
 
-		if(Mathf.Abs(transform.position.x - points[actualPoint].position.x) < 1f)
+		if(Mathf.Abs(transform.position.x - points[actualPoint].position.x) < 0.1f)
 			moving = false;
+	}
+
+	public int ActualSlide()
+	{
+		return actualPoint;
 	}
 }

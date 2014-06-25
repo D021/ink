@@ -110,7 +110,7 @@ public class CharacterControllerRunner : MonoBehaviour
             // Add a vertical force to the player.
             checkGrounded = false;
             rigidbody2D.AddForce(new Vector2(0f, jumpForce));
-            _shamanSpineController.ChangeSpineAnimation("Jump", true);
+            _shamanSpineController.ChangeSpineAnimation("Jump", false);
             StartCoroutine(waitGrounded(0.2f));
             Instantiate(jumpFx, groundCheck.position, Quaternion.identity);
         }
