@@ -4,28 +4,31 @@ using System.Collections;
 public class LoopSlidesTrigger : MonoBehaviour {
 	public Transform initialPoint;
 	public InputManagerMouse shaman;
+	public SlidesInkActivateRino rino;
+
 	// Use this for initialization
 
-	void Update()
+	public void StartDemoShaman()
 	{
-		if(Input.GetKeyUp(KeyCode.P))
+		if(shaman)
 		{
-			if(shaman)
-			{
-				if(shaman.AmountMove == 0)
-				{
-					shaman.AmountMove = 1;
-				}
-				
-				else
-				{
-					shaman.AmountMove = 0;
-				}
-			}
+			shaman.AmountMove = 0.7f;
 
 		}
-			
+		
 	}
+
+
+
+	public void StopDemoShaman()
+	{
+		if(shaman)
+			shaman.AmountMove = 0;
+
+
+	}
+	
+
 
 	void OnTriggerEnter2D(Collider2D player)
 	{

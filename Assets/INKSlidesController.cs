@@ -6,6 +6,7 @@ namespace com.inkrunner.camera
 {	
 	public class INKSlidesController : MonoBehaviour {
 	
+		public LoopSlidesTrigger[] _loopSlides;
 		private CameraSlidesScript _cameraSlidesScript;
 			// Use this for initialization
 		void Start () {
@@ -14,23 +15,34 @@ namespace com.inkrunner.camera
 		
 		// Update is called once per frame
 		void Update () {
-			switch(_cameraSlidesScript.ActualSlide())
+			if(Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow))
 			{
-				case 3:
-				if(Input.GetKeyUp(KeyCode.P))
+				switch(_cameraSlidesScript.ActualSlide())
 				{
-					if(Time.timeScale == 0)
-					{
-						Time.timeScale = 1;
-					}
-					else
-					{
-						Time.timeScale =0;						
-					}
-				}	
-				break;
+					
+				case 1:
+					_loopSlides[0].StartDemoShaman();
+					break;
+					
+				case 2:
+					_loopSlides[0].StopDemoShaman();
+					break;
+					
+				case 4:
+					Time.timeScale = 1;
+					break;
 
+				case 5:
+					Time.timeScale = 0;
+					break;
+
+				case 6:
+					Time.timeScale = 1;
+					break;
+					
+				}
 			}
+
 		}
 	}
 }
