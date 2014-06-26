@@ -1,0 +1,68 @@
+
+Enemy.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+root1a
+  rotate: true
+  xy: 2, 12
+  size: 53, 156
+  orig: 53, 156
+  offset: 0, 0
+  index: -1
+root1b
+  rotate: true
+  xy: 214, 13
+  size: 21, 93
+  orig: 21, 93
+  offset: 0, 0
+  index: -1
+root1c
+  rotate: false
+  xy: 307, 182
+  size: 87, 72
+  orig: 87, 72
+  offset: 0, 0
+  index: -1
+root2a
+  rotate: false
+  xy: 160, 2
+  size: 52, 63
+  orig: 52, 63
+  offset: 0, 0
+  index: -1
+root2b
+  rotate: false
+  xy: 364, 86
+  size: 31, 94
+  orig: 31, 94
+  offset: 0, 0
+  index: -1
+root3a
+  rotate: false
+  xy: 307, 80
+  size: 55, 100
+  orig: 55, 102
+  offset: 0, 0
+  index: -1
+root3b
+  rotate: true
+  xy: 396, 201
+  size: 53, 78
+  orig: 53, 78
+  offset: 0, 0
+  index: -1
+root3c
+  rotate: true
+  xy: 214, 36
+  size: 29, 85
+  orig: 29, 85
+  offset: 0, 0
+  index: -1
+sample
+  rotate: true
+  xy: 2, 67
+  size: 187, 303
+  orig: 247, 403
+  offset: 21, 68
+  index: -1

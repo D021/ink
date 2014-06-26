@@ -112,7 +112,7 @@ public class CharacterControllerRunner : MonoBehaviour
             rigidbody2D.AddForce(new Vector2(0f, jumpForce));
             _shamanSpineController.ChangeSpineAnimation("Jump", false);
             StartCoroutine(waitGrounded(0.2f));
-            Instantiate(jumpFx, groundCheck.position, Quaternion.identity);
+            Instantiate(jumpFx, stepsFXPositions.position, Quaternion.identity);
         }
         if (grounded && receiving_damage)
         {
