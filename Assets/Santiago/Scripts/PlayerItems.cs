@@ -37,7 +37,7 @@ public class PlayerItems : MonoBehaviour {
 		case 2:
 			item2Count++;
 			//GameObject.Find("GUIText_2").GetComponent<GUIText>().text=item2Count.ToString();
-			print ("cogi item especial");
+			//print ("cogi item especial");
 			break;
 		default:
 			break;
