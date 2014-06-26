@@ -15,6 +15,11 @@ public class InputManagerGesture : MonoBehaviour
     public float ChargingTime;
     public float FlyingTime;
 
+	
+	public GameObject rinoFX;
+	private GameObject rinoInstance;
+	public Transform rinoPosInstance;
+
     //Private variables
     private Vector2 _firstPressPosition;
     private Vector2 _secondPressPosition;
@@ -137,7 +142,7 @@ public class InputManagerGesture : MonoBehaviour
 
 						//Notify player items control to decreasse the level of ink
 						this.GetComponent<PlayerItems>().usingInk("Rush");
-						StartCoroutine(inkvoking(ChargingTime, "Run"));
+						StartCoroutine(inkvoking(ChargingTime, "Rush"));
 					}
 
                 }
@@ -154,6 +159,12 @@ public class InputManagerGesture : MonoBehaviour
 
     IEnumerator inkvoking(float _time, string _animation)
     {
+		if(_animation == "Rush")
+		{
+			rinoInstance = (GameObject)Instantiate(rinoFX,rinoPosInstance.position,Quaternion.identity);
+			rinoInstance.transform.parent = transform;
+			Destroy(rinoInstance,1.2f);
+		}
 		_characterController.checkGrounded = false;
         yield return new WaitForSeconds(_time);
 		_characterController.checkGrounded = true;

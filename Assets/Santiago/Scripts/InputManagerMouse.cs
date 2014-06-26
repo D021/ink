@@ -17,6 +17,9 @@ public class InputManagerMouse : MonoBehaviour
 	private string activeInkoke;
 
 
+	public GameObject rinoFX;
+	private GameObject rinoInstance;
+	public Transform rinoPosInstance;
 
 
 
@@ -149,7 +152,7 @@ public class InputManagerMouse : MonoBehaviour
 					this.GetComponent<PlayerItems>().usingInk("Rush");
 //					GetComponent<PlayerLifeControl>().attacking=true;
 
-					StartCoroutine(inkvoking(ChargingTime, "Run"));
+					StartCoroutine(inkvoking(ChargingTime, "Rush"));
 
 				}
 
@@ -170,6 +173,12 @@ public class InputManagerMouse : MonoBehaviour
 	
 	IEnumerator inkvoking(float _time, string _animation)
 	{
+		if(_animation == "Rush")
+		{
+			rinoInstance = (GameObject)Instantiate(rinoFX,rinoPosInstance.position,Quaternion.identity);
+			rinoInstance.transform.parent = transform;
+			Destroy(rinoInstance,1.2f);
+		}
 		_characterController.checkGrounded = false;
 		yield return new WaitForSeconds(_time);
 		_characterController.checkGrounded = true;
