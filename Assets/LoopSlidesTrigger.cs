@@ -12,7 +12,7 @@ public class LoopSlidesTrigger : MonoBehaviour {
 	{
 		if(shaman)
 		{
-			shaman.AmountMove = 0.7f;
+			shaman.AmountMove = 0.6f;
 
 		}
 		
