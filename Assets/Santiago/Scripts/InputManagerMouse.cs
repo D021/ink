@@ -111,15 +111,15 @@ public class InputManagerMouse : MonoBehaviour
             //swipe ups
             if (_currentSwipe.y > SwipeThreshold && Mathf.Abs(_currentSwipe.x) < SwipeThreshold)
             {
-				print ( "SWIPE UP!");
-				_characterController.CancelJump();
-				//Start animation
-				_shamanSpineController.ChangeSpineAnimation("Fly", false);
-				
-				//Notify player items control to decreasse the level of ink
-				this.GetComponent<PlayerItems>().usingInk("Fly");
-				
-				StartCoroutine(inkvoking(FlyingTime, "Fly"));
+//				print ( "SWIPE UP!");
+//				_characterController.CancelJump();
+//				//Start animation
+//				_shamanSpineController.ChangeSpineAnimation("Fly", false);
+//				
+//				//Notify player items control to decreasse the level of ink
+//				this.GetComponent<PlayerItems>().usingInk("Fly");
+//				
+//				StartCoroutine(inkvoking(FlyingTime, "Fly"));
             }
 
             //swipe down
