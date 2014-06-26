@@ -35,7 +35,8 @@ public class CharacterControllerRunner : MonoBehaviour
     public float stepsRadius;
     public float timeStepFX;
     private bool canInstantiateFX = true;
-
+    public AudioClip[] jumpClips;
+    public AudioClip[] stepClips;
     public GameObject jumpFx;
 
     void Awake()
@@ -43,7 +44,6 @@ public class CharacterControllerRunner : MonoBehaviour
         // Setting up references.
         groundCheck = transform.Find("GroundCheck");
         _shamanSpineController = GetComponent<ShamanChangeSpineAnimation>();
-
     }
 
 
@@ -101,6 +101,8 @@ public class CharacterControllerRunner : MonoBehaviour
 
             Flip();
             rigidbody2D.AddForce(new Vector2(0f, jumpForce));
+            audio.clip = jumpClips[Random.Range(0, jumpClips.Length - 1)];
+            audio.Play();
             verticalJump = false;
         }
 
@@ -113,6 +115,8 @@ public class CharacterControllerRunner : MonoBehaviour
             _shamanSpineController.ChangeSpineAnimation("Jump", false);
             StartCoroutine(waitGrounded(0.2f));
             Instantiate(jumpFx, stepsFXPositions.position, Quaternion.identity);
+            audio.clip = jumpClips[Random.Range(0, jumpClips.Length - 1)];
+            audio.Play();
         }
         if (grounded && receiving_damage)
         {
@@ -159,10 +163,28 @@ public class CharacterControllerRunner : MonoBehaviour
         checkGrounded = true;
     }
 
+    private int stepIndex = 0;
+
+    private void playStep()
+    {
+        audio.clip = stepClips[stepIndex];
+        audio.Play();
+        if (stepIndex < stepClips.Length - 1)
+        {
+            stepIndex++;
+        }
+        else
+        {
+            stepIndex = 0;
+        }
+    }
+
     IEnumerator waitStepGrounded()
     {
         yield return new WaitForSeconds(timeStepFX);
         canInstantiateFX = true;
+
+        playStep();
     }
 
 }
